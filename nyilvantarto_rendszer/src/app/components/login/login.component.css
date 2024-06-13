@@ -1,0 +1,48 @@
+
+
+.card{
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 5%;
+  text-align: center;
+}
+mat-form-field{
+  width: 20vw;
+}
+
+.submit{
+  width: 20vw;
+  font-size: 18px;
+  background-color: rgb(85, 50, 92);
+  color: rgb(255, 255, 255);
+}
+
+.reg{
+  width: 20vw;
+  margin-top: 10px;
+  background-color: rgb(85, 50, 92);
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+}
+
+button{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.title{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin: 20px;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+.logintitle{
+  color:  rgb(100, 10, 112);
+  text-align: center;
+}
+
+#wrongDatas{
+  margin-bottom: 5px;
+  color: rgb(255, 74, 74);
+
+}

@@ -1,0 +1,32 @@
+
+
+<mat-card class="card">
+  <h2 class="title">Háztartási nyilvántartó rendszer</h2>
+  <h2 class="logintitle">Bejelentkezés</h2>
+  <mat-card-content>
+  <form class="background" [formGroup]= "loginForm" (ngSubmit)="onSubmit()" class="form" >
+
+    <mat-form-field>
+      <input matInput type="text" placeholder="Felhasználónév" formControlName="userName">
+    </mat-form-field>
+    <br>
+
+    <mat-form-field>
+      <input matInput  placeholder="Jelszó" type="password" formControlName="password">
+    </mat-form-field>
+    <br>
+    <div id="wrongDatas"></div>
+
+    <button mat-raised-button type="submit" [disabled]="!loginForm.valid"  class="submit" >Bejelentkezés</button>
+    
+  </form>
+</mat-card-content>
+</mat-card>
+
+<mat-card class="card">
+  <mat-card-content>
+    <h3 class="title">Nincsen még fiókod?</h3>
+    <button mat-raised-button routerLinkActive="active" class="reg" routerLink="/registration">Regisztráció</button>
+  </mat-card-content>
+</mat-card>
+
