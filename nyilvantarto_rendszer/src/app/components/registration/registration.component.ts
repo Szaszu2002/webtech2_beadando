@@ -66,6 +66,8 @@ export class RegistrationComponent implements OnInit {
     if (!this.createForm.valid) {
       return false;
     } else {
+      let addThing=this.createForm.value;
+      addThing['_id']=this.createForm.value.userName;
       this.apiService.createUser(this.createForm.value).subscribe(
         (res) => {
           console.log('Successfully created!');

@@ -7,21 +7,8 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 import { User } from '../../models/user'
-
-
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'MM/YYYY',
-  },
-  display: {
-    dateInput: 'MM/YYYY',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
-  },
-};
-
-
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { MatCard } from '@angular/material/card';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -32,19 +19,18 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-product-create',
-  templateUrl: './product-create.component.html',
-  styleUrls: ['./product-create.component.css']
+  selector: 'app-container-create',
+  templateUrl: './container-create.component.html',
+  styleUrls: ['./container-create.component.css']
 })
-export class ProductCreateComponent implements OnInit {
-  id:string;
+export class ContainerCreateComponent implements OnInit {
+
 
   user= new User();
   username: string;
   name: string;
   email: string;
-
-  
+  id: string;
 
 
   constructor(
@@ -52,7 +38,7 @@ export class ProductCreateComponent implements OnInit {
     private router: Router,
     private ngZone: NgZone,
     private apiService: ApiService,
-    private route:ActivatedRoute
+    private route: ActivatedRoute
   ) {
     this.mainForm();
     this.getUser();
@@ -70,16 +56,15 @@ export class ProductCreateComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(
-      (params) =>{
+      (params)=>{
         this.id=params['id'];
-      })
+      }
+    )
   }
 
   mainForm() {
     this.createForm = this.formBuilder.group({
       name: [''],
-      amount: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-      unit: [''],
       limit: ['']
     });
   }
@@ -90,11 +75,12 @@ export class ProductCreateComponent implements OnInit {
       return false;
     } else {
       let addThing=this.createForm.value;
-      addThing['container_id']=this.id;
-      this.apiService.createProduct(addThing).subscribe(
+      addThing['user_id']=this.id;
+      addThing['shared']=[];
+      this.apiService.createContainer(addThing).subscribe(
         (res) => {
-          console.log('Product successfully created!');
-          this.ngZone.run(() => this.router.navigateByUrl('/product-list/'+this.id));
+          console.log('Container successfully created!');
+          this.ngZone.run(() => this.router.navigateByUrl('/container-list/'+this.id));
         }, (error) => {
           console.log(error);
         });
@@ -121,7 +107,7 @@ export class ProductCreateComponent implements OnInit {
   }
 
   back(){
-    this.router.navigateByUrl('product-list/'+this.id)
+    this.router.navigateByUrl('container-list/'+this.id)
   }
 
 }

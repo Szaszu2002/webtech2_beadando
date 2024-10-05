@@ -14,6 +14,7 @@ export class AccountInfoComponent implements OnInit {
   username: string;
   name: string;
   email: string;
+  
 
   constructor(
     private router: Router,
@@ -34,9 +35,14 @@ export class AccountInfoComponent implements OnInit {
     }
 
     this.user=this.apiService.getCurrentuser();
-    this.name= JSON.stringify(this.user.name)
-    this.username= JSON.stringify(this.user.userName)
-    this.email= JSON.stringify(this.user.email)
+    this.name= this.user.name
+    this.username= this.user.userName
+    this.email= this.user.email
+  }
+
+  back(){
+    
+    this.router.navigateByUrl('/container-list/'+ this.username);
   }
   
   logout(){

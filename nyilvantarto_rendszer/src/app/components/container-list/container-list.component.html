@@ -1,0 +1,82 @@
+<mat-card class="menucard">
+  <mat-card-content>
+        <h2 class="title">Tárolók megtekintése</h2>
+   <button mat-raised-button routerLinkActive="active" (click)=add() class="menubtn">Új tároló létrehozása</button>
+   <button mat-raised-button routerLinkActive="active" routerLink="/account-info" class="menubtn">Felhasználó adatai</button>
+   <button mat-raised-button  routerLinkActive="active" (click)=logout() class="logout">Kijelentkezés</button>
+  </mat-card-content>
+</mat-card>
+  
+<table class="container-table" >
+  <thead>
+    <tr>
+      <th>Azonosító</th>
+      <th>Név</th>
+      <th>Időtartam</th>
+      <th>Törlés</th>
+      <th>Megnyitás</th>
+      <th>Megosztás</th>
+    </tr>
+  </thead>
+  
+  <tbody >
+    <ng-container *ngFor="let container of Containers; let i=index">
+      <tr>
+        {{colorRed(i)}}
+        <td>{{container._id}}</td>
+        <td>{{container.name}}</td>
+        <td>{{container.limit}}</td>
+        <td><button mat-raised-button (click)=delete(i)>Törlés</button></td>
+        <td><button mat-raised-button (click)=open(i)>Megnyitás</button></td>
+        <td><button mat-raised-button (click)=share(i)>Megosztás</button></td>
+  
+      </tr>
+    </ng-container>
+    
+  </tbody>
+</table>
+
+<table class="container-table" >
+  <thead>
+    <tr>
+      <th>Azonosító</th>
+      <th>Név</th>
+      <th>Időtartam</th>
+      <th>Megnyitás</th>
+    </tr>
+  </thead>
+  
+  <tbody >
+    <ng-container *ngFor="let container of sharedContainers; let i=index">
+      <tr>
+        {{colorRedShared(i)}}
+        <td>{{container._id}}</td>
+        <td>{{container.name}}</td>
+        <td>{{container.limit}}</td>
+        <td><button mat-raised-button (click)=openshared(i)>Megnyitás</button></td>
+  
+      </tr>
+    </ng-container>
+    
+  </tbody>
+</table>
+  
+  <!--<mat-sidenav-container class="sidenav">
+    <div class="list">
+      <mat-card class="cardlist" *ngFor="let container of Containers; let i= index">
+        <mat-card-title class="title">
+          {{container.name}}
+        </mat-card-title>
+        <mat-list-item >
+          <br>
+          <div> Azonosító: {{container.id}} </div>
+          <br>
+          <div> időtartam: {{container.limit}} </div>
+          <br>
+        </mat-list-item>
+        <button mat-raised-button (click)=edit(i)>Módosítás</button>
+        <button mat-raised-button (click)=delete(i)>Törlés</button>
+      </mat-card>
+    </div>
+    </mat-sidenav-container>-->
+  

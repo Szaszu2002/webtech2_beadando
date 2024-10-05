@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   });
 
   users: any=[];
+  id: string;
 
   constructor(
 
@@ -33,14 +34,14 @@ export class LoginComponent implements OnInit {
 
 
   onSubmit(){
-    let currentUser=(JSON.stringify(this.loginForm.value.userName))
-    let currentPassword=(JSON.stringify(this.loginForm.value.password))
+    let currentUser=this.loginForm.value.userName
+    let currentPassword=this.loginForm.value.password
     let match= false;
     this.apiService.getUsers().subscribe((data) =>{
       this.users=data;
 
       for(let user of this.users){
-        if(JSON.stringify(user.userName) === currentUser && currentPassword === JSON.stringify(user.password) ){
+        if(user.userName === currentUser && currentPassword === user.password){
           match=true;
           this.apiService.setCurrentuser(user);
         }
@@ -48,7 +49,7 @@ export class LoginComponent implements OnInit {
 
 
       if(match){
-        this.router.navigate(['/product-list']);
+        this.router.navigate(['/container-list/'+ currentUser]);
       }
       else{
         document.getElementById('wrongDatas').innerHTML="Incorrect username or password!";

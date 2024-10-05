@@ -1,5 +1,25 @@
 
-
+.product-table {
+  min-height: 360px;
+  height: 5%;
+  margin-top: 10px;
+  padding-left: 80px;
+  padding-right: 50px; 
+  width:100%;
+}
+th {
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+td {
+  padding-top: 10px;
+  padding-left: 70px;
+  padding-right: 50px;
+}
+tr {
+  border-bottom: 1px solid #ddd;
+}
 .cardlist{
   background-color: #c59fca;
   margin: 20px;

@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const productRoute = express.Router();
+const ObjectId = require('mongodb').ObjectId;
 
 // Product model
 let Product = require('../models/Product');
@@ -38,6 +39,16 @@ productRoute.route('/getProduct/:id').get((req, res) => {
   })
 })
 
+productRoute.route('/getAllProduct/:id').get((req,res) => {
+  
+  Product.find({'container_id':req.params.id}, (error, data) => {
+    if (error) {
+      return next(error)
+    } else {
+      res.json(data)
+    }
+  })
+})
 
 // Update Product
 productRoute.route('/updateProduct/:id').put((req, res, next) => {
@@ -56,7 +67,7 @@ productRoute.route('/updateProduct/:id').put((req, res, next) => {
 
 // Delete Product
 productRoute.route('/deleteProduct/:id').delete((req, res, next) => {
-  Product.findOneAndRemove(req.params.id, (error, data) => {
+  Product.deleteOne({"_id": new ObjectId(req.params.id)}, (error, data) => {
     if (error) {
       return next(error);
     } else {
@@ -65,6 +76,18 @@ productRoute.route('/deleteProduct/:id').delete((req, res, next) => {
       })
     }
   })
+})
+
+productRoute.route('/productLimits/:id').get((req, res, next)=>{
+  
+  Product.find({"container_id": req.params.id}, {"limit.$":1}, (error, data) =>{
+    if (error) {
+      return next(error)
+    } else {
+      res.json(data)
+    }
+    
+  });
 })
 
 module.exports = productRoute;

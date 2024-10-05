@@ -1,0 +1,50 @@
+<mat-card class="menucard">
+    <mat-card-content>
+        <h2 class="title">Tároló megosztása</h2>
+   <button mat-raised-button routerLinkActive="active" (click)=back() class="menubtn">Tárolók megtekintése</button>
+   <button mat-raised-button routerLinkActive="active" routerLink="/account-info" class="menubtn">Felhasználó adatai</button>
+   <button mat-raised-button  routerLinkActive="active" (click)=logout() class="logout">Kijelentkezés</button>
+    </mat-card-content>
+  <mat-card>
+  
+  <mat-card class="card">
+    <h2 class="title">Tároló megosztása</h2>
+    <mat-card-content>
+    <table>
+      <thead>
+        <tr>
+          <th>Felhasználónév</th>
+          <th>Név</th>
+        </tr>
+      </thead>
+      
+      <tbody >
+        <ng-container *ngFor="let user of shared; let i=index">
+          <tr>
+            <td>{{user.userName}}</td>
+            <td>{{user.name}}</td>
+            
+            <td><button mat-raised-button (click)=delete(i)>Törlés</button></td>
+            
+      
+          </tr>
+        </ng-container>
+        
+      </tbody>
+    </table>
+    <form   [formGroup]="createForm" (ngSubmit)="onSubmit()" class="form" >
+      <br>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Felhasználónév" formControlName="username">
+      </mat-form-field>
+      <br>
+  
+      
+      <br>
+  
+      <button color="primary" mat-raised-button type="submit"  class="submit" >Hozzáadás</button>
+      
+    </form>
+    </mat-card-content>
+  </mat-card>
+  

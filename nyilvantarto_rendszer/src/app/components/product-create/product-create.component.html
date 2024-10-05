@@ -1,7 +1,7 @@
 <mat-card class="menucard">
   <mat-card-content>
-      <h2 class="title">Új termék létrhozása</h2>
- <button mat-raised-button routerLinkActive="active" routerLink="/product-list" class="menubtn">Termékek megtekintése</button>
+      <h2 class="title">Új termék létrehozása</h2>
+ <button mat-raised-button routerLinkActive="active" (click)=back() class="menubtn">Termékek megtekintése</button>
  <button mat-raised-button routerLinkActive="active" routerLink="/account-info" class="menubtn">Felhasználó adatai</button>
  <button mat-raised-button  routerLinkActive="active" (click)=logout() class="logout">Kijelentkezés</button>
 </mat-card-content>
@@ -18,7 +18,7 @@
     <br>
 
     <mat-form-field >
-      <input matInput  placeholder="Mennyiség" type="text"  formControlName="amount">
+      <input matInput  placeholder="Mennyiség" type="number"  formControlName="amount">
     </mat-form-field>
     <br>
 

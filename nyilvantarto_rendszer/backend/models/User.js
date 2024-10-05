@@ -3,6 +3,9 @@ const Schema = mongoose.Schema;
 
 // Define collection and schema
 let User = new Schema({
+  _id:{
+    type: String
+  },
   name: {
     type: String
   },

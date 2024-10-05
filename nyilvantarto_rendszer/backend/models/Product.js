@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 // Define collection and schema
 let Product = new Schema({
+  
   name: {
     type: String
   },
@@ -14,6 +15,9 @@ let Product = new Schema({
   },
   limit: {
     type: Date
+  },
+  container_id: {
+    type: String
   }
 }, {
   collection: 'products'

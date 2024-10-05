@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { ProductCreateComponent } from './components/product-create/product-create.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductEditComponent } from './components/product-edit/product-edit.component';
+import { ContainerCreateComponent } from './components/container-create/container-create.component';
+import { ContainerListComponent } from './components/container-list/container-list.component';
+import { ContainerShareComponent } from './components/container-share/container-share.component';
 import { LoginComponent } from './components/login/login.component';
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,12 +18,16 @@ import { AccountInfoComponent } from './components/account-info/account-info.com
 import { ApiService } from './service/api.service';
 import { HttpClientModule } from '@angular/common/http';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     ProductCreateComponent,
     ProductListComponent,
     ProductEditComponent,
+    ContainerListComponent,
+    ContainerCreateComponent,
+    ContainerShareComponent,
     LoginComponent,
     RegistrationComponent,
     AccountInfoComponent

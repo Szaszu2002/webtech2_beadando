@@ -1,7 +1,7 @@
 <mat-card class="menucard">
   <mat-card-content>
     <h2 class="title">Felhasználó adatai</h2>
- <button mat-raised-button routerLinkActive="active" routerLink="/product-list" class="menubtn">Termékek megtekintése</button>
+ <button mat-raised-button routerLinkActive="active" (click)=back() class="menubtn">Tárolók megtekintése</button>
  <button mat-raised-button routerLinkActive="active" routerLink="/product-create" class="menubtn">Új termék létrehozása</button>
  <button mat-raised-button  routerLinkActive="active" (click)=logout() class="logout">Kijelentkezés</button>
 </mat-card-content>

@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const userRoute = express.Router();
+const ObjectId = require('mongodb').ObjectId;
 
 // User model
 let User = require('../models/User');
@@ -29,6 +30,7 @@ userRoute.route('/getallUser').get((req, res) => {
 
 // Get single User
 userRoute.route('/getUser/:id').get((req, res) => {
+  console.log(req.params.id);
   User.findById(req.params.id, (error, data) => {
     if (error) {
       return next(error)

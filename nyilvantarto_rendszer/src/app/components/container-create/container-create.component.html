@@ -1,0 +1,31 @@
+<mat-card class="menucard">
+    <mat-card-content>
+        <h2 class="title">Új tároló létrhozása</h2>
+   <button mat-raised-button routerLinkActive="active" (click)=back() class="menubtn">Tárolók megtekintése</button>
+   <button mat-raised-button routerLinkActive="active" routerLink="/account-info" class="menubtn">Felhasználó adatai</button>
+   <button mat-raised-button  routerLinkActive="active" (click)=logout() class="logout">Kijelentkezés</button>
+    </mat-card-content>
+  <mat-card>
+  
+  <mat-card class="card">
+    <h2 class="title">Új tároló létrehozása</h2>
+    <mat-card-content>
+    <form   [formGroup]="createForm" (ngSubmit)="onSubmit()" class="form" >
+      <br>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Name" formControlName="name">
+      </mat-form-field>
+      <br>
+  
+      <mat-form-field>
+        <input matInput placeholder="Tároló időtartama" type="number" formControlName="limit" />
+        <mat-hint  align = "end" > A tároló időtartamának megadásával jelzést tudunk Önnek küldeni, ha egy adott termék mennyisége nem csökkent a megadott időtartam alatt. </mat-hint>
+      </mat-form-field> 
+      <br>
+  
+      <button color="primary" mat-raised-button type="submit"  class="submit" >Létrehozás</button>
+      
+    </form>
+    </mat-card-content>
+  </mat-card>
+  

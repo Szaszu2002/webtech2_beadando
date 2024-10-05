@@ -23,6 +23,7 @@ mongoose.connect(dbConfig.db, {
 // Setting up port with express js
 const productRoute = require('../backend/routes/product.route')
 const userRoute = require('../backend/routes/user.route')
+const containerRoute = require('../backend/routes/container.route')
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -33,6 +34,7 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'dist/meanapp')));
 app.use('/', express.static(path.join(__dirname, 'dist/meanapp')));
+app.use('/api', containerRoute)
 app.use('/api', productRoute)
 app.use('/api', userRoute)
 

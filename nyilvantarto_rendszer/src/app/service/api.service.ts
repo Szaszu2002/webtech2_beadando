@@ -67,9 +67,31 @@ createProduct(data): Observable<any> {
     );
 }
 
+createContainer(data): Observable<any> {
+  const url = `${this.baseUri}/createContainer`;
+  return this.http.post(url, data)
+    .pipe(
+      catchError(this.errorMgmt)
+    );
+}
+
 // Get all 
-getProducts() {
-  return this.http.get(`${this.baseUri}/getallProduct`);
+getProducts(id) {
+  return this.http.get<any[]>(`${this.baseUri}/getallProduct/`+id);
+
+}
+
+getContainers(id) {
+  return this.http.get<any[]>(`${this.baseUri}/getallContainer/`+id);
+}
+
+getContainer(id):Observable<any> {
+  console.log("This is an id: "+new Object(id))
+  return this.http.get<any>(`${this.baseUri}/getContainer/`+id);
+}
+
+getSharedContainers(id){
+  return this.http.get<any[]>(`${this.baseUri}/getSharedContainers/${id}`);
 }
 
 // Get by ID
@@ -91,6 +113,13 @@ updateProduct(id, data): Observable<any> {
   );
 }
 
+updateContainer(id, data): Observable<any> {
+  const url = `${this.baseUri}/updateContainer/${id}`;
+  return this.http.put(url, data, { headers: this.headers }).pipe(
+    catchError(this.errorMgmt)
+  );
+}
+
 // Delete 
 deleteProduct(id): Observable<any> {
   const url = `${this.baseUri}/deleteProduct/${id}`;
@@ -99,6 +128,12 @@ deleteProduct(id): Observable<any> {
   );
 }
 
+deleteContainer(id): Observable<any> {
+  const url = `${this.baseUri}/deleteContainer/${id}`;
+  return this.http.delete(url, { headers: this.headers }).pipe(
+    catchError(this.errorMgmt)
+  );
+}
 
 setCurrentuser(user){
   this.currentUser=user;
@@ -109,7 +144,9 @@ getCurrentuser(){
   return this.currentUser;
 }
 
-
+getLimits(id){
+  return this.http.get<any[]>(`${this.baseUri}/productLimits/${id}`)
+}
 
 // Error handling
 errorMgmt(error: HttpErrorResponse) {

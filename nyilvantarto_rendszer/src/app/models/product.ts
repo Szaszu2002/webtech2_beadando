@@ -3,4 +3,5 @@ export class Product{
   amount: number;
   unit: string;
   limit: Date;
+  container_id: string;
 }

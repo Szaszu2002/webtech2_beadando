@@ -1,0 +1,93 @@
+
+.container-table {
+    min-height: 360px;
+    height: 5%;
+    margin-top: 10px;
+    padding-top: 30px;
+    padding-left: 50px;
+    padding-right: 50px; 
+    width:100%;
+  }
+  th {
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 10px;
+  }
+  td {
+    padding-top: 10px;
+    padding-left: 70px;
+    padding-right: 50px;
+  }
+  tr {
+    border-bottom: 1px solid #ddd;
+    padding-left: 90px;
+    padding-top: 50px;
+  }
+  
+  .cardlist{
+    background-color: #c59fca;
+    margin: 20px;
+    width: 30%;
+    text-align: center;
+  }
+  
+  .sidenav{
+    width:100%;
+    height: 200%;
+  }
+  
+  
+  .logout{
+    color: #7400c2;
+    background-color: #ffffff;
+    font-size: 18px;
+    width: 20%;
+    margin-left: 60%;
+  }
+  
+  mat-sidenav-container {
+    margin-top: 1%;
+    position:sticky;
+    height: 90%;
+    min-height: 90%;
+    width: 50%;
+  }
+  
+  
+  .list{
+    width: 100%;
+    margin-left: 25%;
+  }
+  
+  .menucard{
+    width: 90%;
+    margin-right: 5%;
+    margin-left: 5%;
+  }
+  
+  .card{
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 20%;
+  }
+  
+  .menubtn{
+    margin: 10px;
+    width: 20%;
+    font-size: 18px;
+  }
+  
+  button{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #7400c2;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    margin-right: 2%;
+  }
+  
+  .title{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(0, 0, 0);
+    margin: 0 auto;
+  }
+
