@@ -7,6 +7,24 @@
 </mat-card-content>
 </mat-card>
 
+<mat-card class="card">
+
+  <h2 class="title">Kiválasztott termék</h2>
+  <mat-card-content>
+  <form [formGroup]="createForm" (ngSubmit)="onSubmit()" class="form" >
+
+    <mat-form-field >
+      <input matInput type="text" placeholder="Keresés" formControlName="search">
+    </mat-form-field>
+    <br>
+
+    <button mat-raised-button type="submit"  class="submit" >Keresés</button>
+
+  </form>
+</mat-card-content>
+</mat-card>
+
+
 <table class="product-table">
         <thead>
             <tr>

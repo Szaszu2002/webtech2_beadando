@@ -84,10 +84,22 @@ productRoute.route('/productLimits/:id').get((req, res, next)=>{
     if (error) {
       return next(error)
     } else {
+      console.log(data)
       res.json(data)
     }
     
   });
+})
+
+productRoute.route('/getAllProduct/:id/:searchValue').get((req,res) => {
+  
+  Product.find({'container_id':req.params.id, 'name':req.params.searchValue}, (error, data) => {
+    if (error) {
+      return next(error)
+    } else {
+      res.json(data)
+    }
+  })
 })
 
 module.exports = productRoute;

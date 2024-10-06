@@ -141,6 +141,7 @@ export class ContainerListComponent implements OnInit {
   }
 
   colorRed(index){
+    
     this.apiService.getLimits(this.Containers[index]._id).subscribe((data)=>{
       let limits= data;
       
@@ -148,6 +149,7 @@ export class ContainerListComponent implements OnInit {
         let now = Date.now();
         let limitDate = new Date(limit).getTime();
         if(now-limitDate>=0){
+          
           document.querySelectorAll("tr")[index+1].style.backgroundColor="red";
           return;
         }

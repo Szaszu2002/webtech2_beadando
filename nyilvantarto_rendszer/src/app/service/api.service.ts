@@ -162,7 +162,11 @@ errorMgmt(error: HttpErrorResponse) {
   return throwError(errorMessage);
 }
 
-
+search(id, searchValue){
+  console.log(searchValue);
+  return this.http.get<any[]>(`${this.baseUri}/getAllProduct/${id}/${searchValue}`);
+ 
+}
 
 }
 
