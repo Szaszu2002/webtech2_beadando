@@ -4,6 +4,7 @@ import { User } from '../../models/user';
 import { ActivatedRoute, Router} from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { Container } from 'src/app/models/container';
 
 @Component({
   selector: 'app-container-list',
@@ -19,7 +20,7 @@ export class ContainerListComponent implements OnInit {
   email: string;
   id: string;
   sharedContainers: any=[];
-  
+  redContainers:number[]=[];
   
   
   
@@ -44,18 +45,11 @@ export class ContainerListComponent implements OnInit {
         this.id=params['id'];
         this.apiService.getContainers(this.id).subscribe((data) =>{
           this.Containers=data;
-          
           try{
-            
-            for (let index = 0; index < this.Containers.length; index++)
-              {
-                console.log(index)
-                
-              
-            }
-          }
-          catch(e){
-            console.log(e.message);
+            this.colorRed();
+            console.log("try");
+          }catch{
+            console.log(this.Containers);
           }
         });
       }
@@ -112,7 +106,7 @@ export class ContainerListComponent implements OnInit {
   edit(index){
 
     let id=this.Containers[index]._id;
-    this.router.navigate(['/container-edit/:'+ id]);
+    this.router.navigate(['/container-edit/'+ id]);
 
   }
 
@@ -140,7 +134,42 @@ export class ContainerListComponent implements OnInit {
       this.router.navigate(['/container-share/'+ id]);
   }
 
-  colorRed(index){
+  colorRed(){
+    let now = new Date();
+    console.log("Container length: "+this.Containers.length)
+    for( var i =0; i< this.Containers.length; i++){
+      console.log("Index: "+i)
+      //    let limitDate = new Date(this.Containers[i].limit);
+      // if(now>=limitDate&&this.redContainers.indexOf(i)==-1){
+      //        this.redContainers.push(i);
+      // }
+    console.log(this.Containers[i]._id)
+    this.apiService.getLimits(this.Containers[i]._id).subscribe((data)=>{
+      let limit="";
+      console.log("try előtt!!!")
+      try{
+         limit= data.limit;
+         console.log(data)
+      }catch{
+        console.log("catch")
+        console.log(data)
+      }
+      if (limit==""){
+        return;
+      }
+      
+      console.log(limit)
+        // let now = new Date();
+        let limitDate = new Date(limit);
+        console.log("now: "+now+"limitdate: "+limitDate)
+        if(now>=limitDate&&this.redContainers.indexOf(i)==-1){
+          this.redContainers.push(i);
+        }
+      
+    });
+  }
+  }
+  /*colorRed(index){
     
     this.apiService.getLimits(this.Containers[index]._id).subscribe((data)=>{
       let limits= data;
@@ -155,7 +184,7 @@ export class ContainerListComponent implements OnInit {
         }
       }
     });
-  }
+  }*/
     colorRedShared(index){
       this.apiService.getLimits(this.sharedContainers[index]._id).subscribe((data)=>{
         let limits= data;

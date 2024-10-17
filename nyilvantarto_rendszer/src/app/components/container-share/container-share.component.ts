@@ -79,6 +79,7 @@ export class ContainerShareComponent implements OnInit {
       addThing['name']=shared_user.name;
         console.log(data);
       console.log(this.container.shared)
+      //itt a ciklussal nézni
       if(this.container['shared'].includes(addThing)) return;
       this.container['shared'].push(addThing);
       this.apiService.updateContainer(this.container._id, this.container).subscribe(

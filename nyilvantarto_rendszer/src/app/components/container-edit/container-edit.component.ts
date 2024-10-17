@@ -4,7 +4,8 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 import { User } from '../../models/user'
-import { Product } from 'src/app/models/product';
+import { Container } from 'src/app/models/container';
+
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -14,18 +15,18 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 @Component({
-  selector: 'app-product-edit',
-  templateUrl: './product-edit.component.html',
-  styleUrls: ['./product-edit.component.css']
+  selector: 'app-container-edit',
+  templateUrl: './container-edit.component.html',
+  styleUrls: ['./container-edit.component.css']
 })
-export class ProductEditComponent implements OnInit {
+export class ContainerEditComponent implements OnInit {
 
-  user = new User();
+  user= new User();
   username: string;
   name: string;
   email: string;
   id:string;
-  product: any = new Product();
+  container: any = new Container();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,19 +39,15 @@ export class ProductEditComponent implements OnInit {
     this.getUser();
   }
 
-  // get myForm() {
-  //   return this.createForm.controls;
-  // }
+ 
 
   submitted = false;
 
   createForm:FormGroup = this.formBuilder.group({
-      name: [this.product.name],
-      amount: [this.product.amount],
-      unit: [this.product.unit],
-      limit: [this.product.limit]
-    
-  });
+    name: [this.container.name],
+    limit: [this.container.limit]
+  
+});
 
   matcher = new MyErrorStateMatcher();
 
@@ -58,9 +55,9 @@ export class ProductEditComponent implements OnInit {
     this.route.params.subscribe(
       (params) =>{
         this.id=params['id'];
-        this.apiService.getProduct(this.id).subscribe(
+        this.apiService.getContainer(this.id).subscribe(
           (data) => {
-            this.product=data;
+            this.container=data;
             this.mainForm();
           }
         );
@@ -69,10 +66,8 @@ export class ProductEditComponent implements OnInit {
 
   mainForm() {
     this.createForm = this.formBuilder.group({
-      name: [this.product.name],
-      amount: [this.product.amount],
-      unit: [this.product.unit],
-      limit: [this.product.limit]
+      name: [this.container.name],
+      limit: [this.container.limit]
     });
   }
 
@@ -82,15 +77,14 @@ export class ProductEditComponent implements OnInit {
       return false;
     } else {
       let addThing=this.createForm.value;
-      this.product.name=addThing.name;
-      this.product.amount=addThing.amount;
-      this.product.limit=addThing.limit;
-      this.product.unit=addThing.unit;
-      //addThing['container_id']=this.id;
-      this.apiService.updateProduct(this.id,this.product).subscribe(
+      this.container.name=addThing.name;
+      this.container.limit=addThing.limit;
+      // addThing['user_id']=this.id;
+      // console.log("id: "+ this.id)
+      this.apiService.updateContainer(this.id, this.container).subscribe(
         (res) => {
-          console.log('Product successfully created!');
-          this.ngZone.run(() => this.router.navigateByUrl('/product-list/'+this.product.container_id));
+          console.log('Container successfully edited!');
+          this.ngZone.run(() => this.router.navigateByUrl('/container-list/'+this.container.user_id));
         }, (error) => {
           console.log(error);
         });
@@ -126,11 +120,11 @@ export class ProductEditComponent implements OnInit {
   }
 
   back(){
-    this.router.navigateByUrl('product-list/'+this.id)
+    this.router.navigateByUrl('container-list/'+this.user._id)
   }
 
   add(){
-    this.router.navigateByUrl('product-create/'+this.id)
+    this.router.navigateByUrl('container-create/'+this.user._id)
   }
 
 

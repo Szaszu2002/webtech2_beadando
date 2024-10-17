@@ -80,8 +80,10 @@ productRoute.route('/deleteProduct/:id').delete((req, res, next) => {
 
 productRoute.route('/productLimits/:id').get((req, res, next)=>{
   
-  Product.find({"container_id": req.params.id}, {"limit.$":1}, (error, data) =>{
+  Product.find({"container_id": req.params.id}, {sort:{"limit":1}}, (error, data) => {
+    console.log("itt vagyok")
     if (error) {
+      console.log(error)
       return next(error)
     } else {
       console.log(data)

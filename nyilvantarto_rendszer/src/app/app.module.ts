@@ -8,6 +8,7 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { ProductEditComponent } from './components/product-edit/product-edit.component';
 import { ContainerCreateComponent } from './components/container-create/container-create.component';
 import { ContainerListComponent } from './components/container-list/container-list.component';
+import { ContainerEditComponent } from './components/container-edit/container-edit.component';
 import { ContainerShareComponent } from './components/container-share/container-share.component';
 import { LoginComponent } from './components/login/login.component';
 import { MaterialModule } from './material.module';
@@ -27,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
     ProductEditComponent,
     ContainerListComponent,
     ContainerCreateComponent,
+    ContainerEditComponent,
     ContainerShareComponent,
     LoginComponent,
     RegistrationComponent,

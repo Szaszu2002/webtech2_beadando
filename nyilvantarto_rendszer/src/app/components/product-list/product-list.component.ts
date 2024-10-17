@@ -99,6 +99,9 @@ export class ProductListComponent implements OnInit {
   add(){
     this.router.navigateByUrl('/product-create/'+this.id);
   }
+  back(){
+    this.router.navigateByUrl('/container-list/'+this.user._id); //ez az id nem jó ide!!!
+  }
 
   getUser(){
 
@@ -123,7 +126,7 @@ export class ProductListComponent implements OnInit {
   edit(index){
 
     let id=this.Products[index]._id;
-    this.router.navigate(['/product-edit/:'+ id]);
+    this.router.navigate(['/product-edit/'+ id]);
 
   }
 

@@ -86,7 +86,6 @@ getContainers(id) {
 }
 
 getContainer(id):Observable<any> {
-  console.log("This is an id: "+new Object(id))
   return this.http.get<any>(`${this.baseUri}/getContainer/`+id);
 }
 
@@ -145,7 +144,8 @@ getCurrentuser(){
 }
 
 getLimits(id){
-  return this.http.get<any[]>(`${this.baseUri}/productLimits/${id}`)
+  console.log("apiService")
+  return this.http.get<any>(`${this.baseUri}/productLimits/${id}`)
 }
 
 // Error handling

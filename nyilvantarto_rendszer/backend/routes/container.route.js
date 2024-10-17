@@ -30,22 +30,8 @@ containerRoute.route('/getallContainer').get((req, res) => {
   })
 })
 
-// Get single Container
 
 
-containerRoute.route('/updateContainer/:id').put((req, res, next) => {
-  Container.findByIdAndUpdate(req.params.id, {
-    $set: req.body
-  }, (error, data) => {
-    if (error) {
-      return next(error);
-      console.log(error)
-    } else {
-      res.json(data)
-      console.log('Data updated successfully')
-    }
-  })
-})
 
 containerRoute.route('/getAllContainer/:id').get((req,res)=>{
   Container.find({'$query':{'user_id':req.params.id}, '$orderby':{'name':-1}},(error, data)=>{

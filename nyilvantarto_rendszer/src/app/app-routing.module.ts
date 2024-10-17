@@ -6,6 +6,7 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { ProductEditComponent } from './components/product-edit/product-edit.component';
 import { ContainerListComponent } from './components/container-list/container-list.component';
 import { ContainerCreateComponent } from './components/container-create/container-create.component';
+import { ContainerEditComponent } from './components/container-edit/container-edit.component';
 import { ContainerShareComponent } from './components/container-share/container-share.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'product-list/:id', component:ProductListComponent},
   {path: 'container-list/:id', component:ContainerListComponent},
   {path: 'container-create/:id', component:ContainerCreateComponent},
+  {path: 'container-edit/:id' , component:ContainerEditComponent},
   {path: 'container-share/:id', component:ContainerShareComponent},
   {path: 'login', component:LoginComponent},
   {path: 'registration', component:RegistrationComponent},
