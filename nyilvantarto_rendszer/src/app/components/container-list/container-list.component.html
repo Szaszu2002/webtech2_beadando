@@ -10,7 +10,7 @@
 <table class="container-table" >
   <thead>
     <tr>
-      <th>Azonosító</th>
+      <!-- <th>Azonosító</th> -->
       <th>Név</th>
       <th>Időtartam</th>
       <th>Módosítás</th>
@@ -24,7 +24,7 @@
     <ng-container *ngFor="let container of Containers; let i=index">
       <tr [ngStyle]="this.redContainers.indexOf(i)!=-1?{'background-color': 'red'} : {'background-color': 'white'}">
         <!-- {{colorRed(i)}} -->
-        <td>{{container._id}}</td>
+        <!-- <td>{{container._id}}</td> -->
         <td>{{container.name}}</td>
         <td>{{container.limit}}</td>
         <td><button mat-raised-button (click)=edit(i)>Módosítás</button></td>
@@ -50,8 +50,7 @@
   
   <tbody >
     <ng-container *ngFor="let container of sharedContainers; let i=index">
-      <tr>
-        {{colorRedShared(i)}}
+      <tr [ngStyle]="this.sharedRedContainers.indexOf(i)!=-1?{'background-color': 'red'} : {'background-color': 'white'}">
         <td>{{container._id}}</td>
         <td>{{container.name}}</td>
         <td>{{container.limit}}</td>

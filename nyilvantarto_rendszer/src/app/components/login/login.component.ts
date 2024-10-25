@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import {ApiService} from 'src/app/service/api.service';
 import { Router} from '@angular/router';
+import { md5 } from 'js-md5';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +36,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit(){
     let currentUser=this.loginForm.value.userName
-    let currentPassword=this.loginForm.value.password
+    let currentPassword=md5(this.loginForm.value.password)
     let match= false;
     this.apiService.getUsers().subscribe((data) =>{
       this.users=data;

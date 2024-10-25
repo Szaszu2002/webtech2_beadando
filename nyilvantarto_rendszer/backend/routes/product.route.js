@@ -39,15 +39,10 @@ productRoute.route('/getProduct/:id').get((req, res) => {
   })
 })
 
-productRoute.route('/getAllProduct/:id').get((req,res) => {
+productRoute.route('/getAllProduct/:id').get(async(req,res) => {
   
-  Product.find({'container_id':req.params.id}, (error, data) => {
-    if (error) {
-      return next(error)
-    } else {
-      res.json(data)
-    }
-  })
+  let documents = await Product.find({'container_id':req.params.id}).sort({"name":1});
+  res.json(documents);
 })
 
 // Update Product
@@ -78,19 +73,15 @@ productRoute.route('/deleteProduct/:id').delete((req, res, next) => {
   })
 })
 
-productRoute.route('/productLimits/:id').get((req, res, next)=>{
-  
-  Product.find({"container_id": req.params.id}, {sort:{"limit":1}}, (error, data) => {
-    console.log("itt vagyok")
-    if (error) {
-      console.log(error)
-      return next(error)
-    } else {
-      console.log(data)
-      res.json(data)
-    }
-    
-  });
+productRoute.route('/productLimits/:id').get(async (req, res, next)=>{
+  let document = await Product.find({$query: {"container_id": req.params.id}}).sort({"limit": 1}).limit(1);
+  try{
+    let limit = document[0].limit;
+    res.json(limit);
+  } catch{
+    res.json("");
+  }
+ 
 })
 
 productRoute.route('/getAllProduct/:id/:searchValue').get((req,res) => {

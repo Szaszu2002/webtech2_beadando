@@ -33,15 +33,17 @@ containerRoute.route('/getallContainer').get((req, res) => {
 
 
 
-containerRoute.route('/getAllContainer/:id').get((req,res)=>{
-  Container.find({'$query':{'user_id':req.params.id}, '$orderby':{'name':-1}},(error, data)=>{
-    if(error){
-      return next(error)
-    } else{
-      res.json(data)
+containerRoute.route('/getAllContainer/:id').get(async(req,res)=>{
+  let documents = await Container.find({'user_id':req.params.id}).sort({"name":1});
+  res.json(documents);
+  // Container.find({'$query':{'user_id':req.params.id}, '$orderby':{'name':-1}},(error, data)=>{
+  //   if(error){
+  //     return next(error)
+  //   } else{
+  //     res.json(data)
       
-    }
-  })
+  //   }
+  // })
 })
 
 containerRoute.route('/getContainer/:id').get((req,res)=>{

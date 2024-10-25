@@ -21,7 +21,7 @@ export class ContainerListComponent implements OnInit {
   id: string;
   sharedContainers: any=[];
   redContainers:number[]=[];
-  
+  sharedRedContainers: number[]=[];
   
   
 
@@ -66,7 +66,7 @@ export class ContainerListComponent implements OnInit {
           
           
           try{
-            
+            this.colorRedShared();
             console.log(this.sharedContainers.length)
           }
           catch(e){
@@ -112,10 +112,14 @@ export class ContainerListComponent implements OnInit {
 
   delete(index){
     console.log(this.Containers[index]._id)
-    this.apiService.deleteContainer(this.Containers[index]._id ?? "").subscribe(() => {
-      console.log("Deleted successfully!");
-      this.Containers.splice(index,1);
-    });
+    let message = confirm("Biztos, hogy törli?")
+    if(message){
+      this.apiService.deleteContainer(this.Containers[index]._id ?? "").subscribe(() => {
+        console.log("Deleted successfully!");
+        this.Containers.splice(index,1);
+      });
+    }
+    
     
   }
 
@@ -137,69 +141,62 @@ export class ContainerListComponent implements OnInit {
   colorRed(){
     let now = new Date();
     console.log("Container length: "+this.Containers.length)
-    for( var i =0; i< this.Containers.length; i++){
-      console.log("Index: "+i)
-      //    let limitDate = new Date(this.Containers[i].limit);
-      // if(now>=limitDate&&this.redContainers.indexOf(i)==-1){
-      //        this.redContainers.push(i);
-      // }
-    console.log(this.Containers[i]._id)
-    this.apiService.getLimits(this.Containers[i]._id).subscribe((data)=>{
-      let limit="";
-      console.log("try előtt!!!")
-      try{
-         limit= data.limit;
-         console.log(data)
-      }catch{
-        console.log("catch")
-        console.log(data)
-      }
-      if (limit==""){
-        return;
-      }
-      
-      console.log(limit)
-        // let now = new Date();
-        let limitDate = new Date(limit);
-        console.log("now: "+now+"limitdate: "+limitDate)
-        if(now>=limitDate&&this.redContainers.indexOf(i)==-1){
-          this.redContainers.push(i);
+    for( let i = 0; i< this.Containers.length; i++){
+      console.log(this.Containers[i]._id);
+      console.log(`index before api ${i}`);
+      this.apiService.getLimits(this.Containers[i]._id).subscribe((data)=>{
+        let limit="";
+        console.log(`index in api ${i}`);
+        try{
+          limit = data;
+        }catch{
+          console.log("catch");
+          console.log(data);
         }
-      
-    });
-  }
-  }
-  /*colorRed(index){
-    
-    this.apiService.getLimits(this.Containers[index]._id).subscribe((data)=>{
-      let limits= data;
-      
-      for(var limit in limits){
-        let now = Date.now();
-        let limitDate = new Date(limit).getTime();
-        if(now-limitDate>=0){
-          
-          document.querySelectorAll("tr")[index+1].style.backgroundColor="red";
-          return;
-        }
-      }
-    });
-  }*/
-    colorRedShared(index){
-      this.apiService.getLimits(this.sharedContainers[index]._id).subscribe((data)=>{
-        let limits= data;
-        for(var limit in limits){
-          let now = Date.now();
-          let limitDate = new Date(limit).getTime();
-          if(now-limitDate>=0){
-            document.querySelectorAll("tr")[index+2+this.Containers.length].style.backgroundColor="red";
-            return;
+        if (limit != ""){
+          console.log(limit)
+          let limitDate = new Date(limit);
+          console.log("now: "+now+"limitdate: "+limitDate);
+          console.log("expired: " + (now>=limitDate));
+          console.log("not in yet: " + (this.redContainers.indexOf(i)==-1));
+          if(now>=limitDate&&this.redContainers.indexOf(i)==-1){
+            this.redContainers.push(i);
+            console.log(`pushed: ${i}`);
           }
         }
-    });
+      });
+    }
   }
-    
-  
+ 
+  colorRedShared(){
+    let now = new Date();
+    console.log("Container length: "+this.Containers.length)
+    for( let i = 0; i< this.sharedContainers.length; i++){
+      console.log(this.sharedContainers[i]._id);
+      console.log(`index before api ${i}`);
+      this.apiService.getLimits(this.sharedContainers[i]._id).subscribe((data)=>{
+        let limit="";
+        console.log(`index in api ${i}`);
+        try{
+          limit = data;
+        }catch{
+          console.log("catch");
+          console.log(data);
+        }
+        if (limit != ""){
+          console.log(limit)
+          let limitDate = new Date(limit);
+          console.log("now: "+now+"limitdate: "+limitDate);
+          console.log("expired: " + (now>=limitDate));
+          console.log("not in yet: " + (this.sharedRedContainers.indexOf(i)==-1));
+          if(now>=limitDate&&this.sharedRedContainers.indexOf(i)==-1){
+            this.sharedRedContainers.push(i);
+            console.log(`pushed: ${i}`);
+          }
+        }
+      });
+    }
+  }
 }
 
 

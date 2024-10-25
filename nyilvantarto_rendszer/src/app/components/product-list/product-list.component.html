@@ -1,7 +1,7 @@
 <mat-card class="menucard">
   <mat-card-content>
       <h2 class="title">Termékek megtekintése</h2>
- <button mat-raised-button routerLinkActive="active" (click)=add() class="menubtn">Új termék hozzáadása</button>
+ <button mat-raised-button routerLinkActive="active" (click)=add() class="menubtn">Új termék létrehozása</button>
  <button mat-raised-button routerLinkActive="active" (click)=back() class="menubtn">Tárolók megtekintése</button>
  <button mat-raised-button routerLinkActive="active" routerLink="/account-info" class="menubtn">Felhasználó adatai</button>
  <button mat-raised-button  routerLinkActive="active" (click)=logout() class="logout">Kijelentkezés</button>
@@ -39,8 +39,7 @@
         </thead>
         <tbody *ngFor="let product of Products; let i= index">
 
-            <tr >
-            {{colorRed(i)}} 
+          <tr [ngStyle]="this.expired.indexOf(i)!=-1?{'background-color': 'red'} : {'background-color': 'white'}">
             <td>{{product.name}}</td>    
             <td>{{product.amount}}</td> 
             <td>{{product.unit}}</td>    

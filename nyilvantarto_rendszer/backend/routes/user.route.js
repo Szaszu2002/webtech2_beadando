@@ -10,7 +10,8 @@ let User = require('../models/User');
 userRoute.route('/addUser').post((req, res, next) => {
   User.create(req.body, (error, data) => {
     if (error) {
-      console.log(error)
+      // console.log(error)
+      return next(error)
     } else {
       res.json(data)
     }
@@ -18,7 +19,7 @@ userRoute.route('/addUser').post((req, res, next) => {
 });
 
 // Get All Products
-userRoute.route('/getallUser').get((req, res) => {
+userRoute.route('/getallUser').get((req, res, next) => {
   User.find((error, data) => {
     if (error) {
       return next(error)

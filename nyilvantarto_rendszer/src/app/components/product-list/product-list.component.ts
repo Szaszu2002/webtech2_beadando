@@ -20,7 +20,7 @@ export class ProductListComponent implements OnInit {
   id: string;
   displayedColumns: string[] = ["Név", "Mennyiség", "Mértékegység", "Lejárati idő"];
   search : String ="";
-  
+  expired: number[] = [];
 
   dataSource = new MatTableDataSource(this.Products);
 
@@ -60,13 +60,14 @@ export class ProductListComponent implements OnInit {
     if (!this.createForm.valid) {
       return false;
     } else {
+ 
       let id= this.router.url.toString();
-      id=id.replace('/product-edit/:','');
-
-      // let searchValue=this.createForm.value.search;
-      // this.apiService.search(id, searchValue).subscribe((data)=>{
-      //   this.setProductList(data);
-      // });
+      id=id.replace('/product-list/','');
+ 
+      let searchValue=this.createForm.value.search;
+      this.apiService.search(id, searchValue).subscribe((data)=>{
+        this.setProductList(data);
+      });
     }
   }
 
@@ -95,6 +96,7 @@ export class ProductListComponent implements OnInit {
     catch(e){
       console.log(e.message);
     }
+    this.colorRed();
   }
   add(){
     this.router.navigateByUrl('/product-create/'+this.id);
@@ -138,13 +140,15 @@ export class ProductListComponent implements OnInit {
     this.Products.splice(index,1);
   }
 
-  colorRed(index){
-    
+  colorRed(){
+    this.expired = []
     let now = Date.now();
-    let limit = new Date(this.Products[index].limit).getTime();
-    if(now-limit>=0){
-      document.querySelectorAll("tr")[index+1].style.backgroundColor="red";
+    for (let i = 0; i < this.Products.length; i++)
+    {
+      let limit = new Date(this.Products[i].limit).getTime();
+      if(now>=limit){
+        this.expired.push(i);
+      }
     }
-    
   }
 }
