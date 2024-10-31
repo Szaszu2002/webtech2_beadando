@@ -41,7 +41,6 @@
 <table class="container-table" >
   <thead>
     <tr>
-      <th>Azonosító</th>
       <th>Név</th>
       <th>Időtartam</th>
       <th>Megnyitás</th>
@@ -51,7 +50,6 @@
   <tbody >
     <ng-container *ngFor="let container of sharedContainers; let i=index">
       <tr [ngStyle]="this.sharedRedContainers.indexOf(i)!=-1?{'background-color': 'red'} : {'background-color': 'white'}">
-        <td>{{container._id}}</td>
         <td>{{container.name}}</td>
         <td>{{container.limit}}</td>
         <td><button mat-raised-button (click)=openshared(i)>Megnyitás</button></td>

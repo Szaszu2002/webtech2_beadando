@@ -144,7 +144,6 @@ getCurrentuser(){
 }
 
 getLimits(id){
-  console.log("apiService")
   return this.http.get<any>(`${this.baseUri}/productLimits/${id}`)
 }
 

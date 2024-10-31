@@ -89,7 +89,7 @@ export class ProductEditComponent implements OnInit {
       //addThing['container_id']=this.id;
       this.apiService.updateProduct(this.id,this.product).subscribe(
         (res) => {
-          console.log('Product successfully created!');
+          console.log('Product successfully edited!');
           this.ngZone.run(() => this.router.navigateByUrl('/product-list/'+this.product.container_id));
         }, (error) => {
           console.log(error);

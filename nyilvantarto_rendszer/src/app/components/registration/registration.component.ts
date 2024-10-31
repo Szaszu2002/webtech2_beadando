@@ -56,8 +56,8 @@ export class RegistrationComponent implements OnInit {
   mainForm() {
     this.createForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern('^[A-Z][a-z].+([a-z])+$')]],
-      userName: [''],
-      password: [''],
+      userName: ['', [Validators.required]],
+      password: ['', [Validators.required]],
       email: ['',[Validators.required, Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$')]],
     });
   }

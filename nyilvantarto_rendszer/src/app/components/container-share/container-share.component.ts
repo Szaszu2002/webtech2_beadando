@@ -10,6 +10,7 @@ import { User } from '../../models/user'
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { MatCard } from '@angular/material/card';
 import { Container } from 'src/app/models/container';
+import { JsonPipe } from '@angular/common';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -73,24 +74,64 @@ export class ContainerShareComponent implements OnInit {
       let username =this.createForm.value.username;
       let shared_user:any = new User() 
       this.apiService.getUser(username).subscribe((data)=>{
-        let addThing={}
-        shared_user=data;
+      let addThing={}
+      shared_user=data;
+      if(JSON.stringify(shared_user)==JSON.stringify({})){
+        return;
+      }
       addThing['userName']=shared_user.userName;
       addThing['name']=shared_user.name;
-        console.log(data);
-      console.log(this.container.shared)
-      //itt a ciklussal nézni
-      if(this.container['shared'].includes(addThing)) return;
-      this.container['shared'].push(addThing);
-      this.apiService.updateContainer(this.container._id, this.container).subscribe(
-        (res) => {
-          console.log('Container successfully created!');
-          this.ngZone.run(() => this.router.navigateByUrl('/container-share/'+this.container._id));
-        }, (error) => {
-          console.log(error);
-        });
-      })
       
+      console.log(data);
+      console.log( this.container)
+      if( this.container.shared.length==0){
+          this.container['shared'].push(addThing);
+          this.apiService.updateContainer(this.container._id, this.container).subscribe(
+            (res) => {
+              console.log('Container successfully shared!');
+              this.ngZone.run(() => this.router.navigateByUrl('/container-share/'+this.container._id));
+            }, (error) => {
+              console.log(error);
+            });
+      }
+      let logic = false;
+      for(let i=0; i<this.container.shared.length; i++){
+        if(JSON.stringify(addThing)==JSON.stringify(this.container.shared[i])){
+          logic=true;
+          break;
+        }        
+      }
+      if(!logic){
+        this.container['shared'].push(addThing);
+        this.apiService.updateContainer(this.container._id, this.container).subscribe(
+          (res) => {
+            console.log('Container successfully created!');
+            this.ngZone.run(() => this.router.navigateByUrl('/container-share/'+this.container._id));
+          }, (error) => {
+            console.log(error);
+          });
+      }
+      //itt a ciklussal nézni
+      // for(let i=0; i<this.container.shared.length; i++){
+      //   if(addThing==this.container.shared[i]){
+      //     console.log("The container is already shared with this user.");
+      //     return;
+      //   }
+      //   else{
+      //     if(this.container['shared'].includes(addThing)) return;
+      //     this.container['shared'].push(addThing);
+      //     this.apiService.updateContainer(this.container._id, this.container).subscribe(
+      //       (res) => {
+      //         console.log('Container successfully created!');
+      //         this.ngZone.run(() => this.router.navigateByUrl('/container-share/'+this.container._id));
+      //       }, (error) => {
+      //         console.log(error);
+      //       });
+    
+      //   }
+      // }
+    })
+        
       // if(!(addThing in this.container.shared_user)){
 
       // }
@@ -109,10 +150,7 @@ export class ContainerShareComponent implements OnInit {
         this.container=data;
         this.username= this.container.user_id;
         this.shared=this.container.shared;
-        console.log("Container: "+this.container[0])
        });
-        
-        
       });
     
   }

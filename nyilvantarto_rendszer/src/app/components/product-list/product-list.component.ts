@@ -133,11 +133,14 @@ export class ProductListComponent implements OnInit {
   }
 
   delete(index){
-
-    this.apiService.deleteProduct(this.Products[index]._id ?? "").subscribe(() => {
-      console.log("Deleted successfully!");
-    });
-    this.Products.splice(index,1);
+    let message = confirm("Biztos, hogy törli?")
+    if(message){
+      this.apiService.deleteProduct(this.Products[index]._id ?? "").subscribe(() => {
+        console.log("Deleted successfully!");
+        this.Products.splice(index,1);
+      });
+    }
+    
   }
 
   colorRed(){
