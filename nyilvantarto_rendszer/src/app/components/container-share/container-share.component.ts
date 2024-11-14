@@ -105,7 +105,7 @@ export class ContainerShareComponent implements OnInit {
         this.container['shared'].push(addThing);
         this.apiService.updateContainer(this.container._id, this.container).subscribe(
           (res) => {
-            console.log('Container successfully created!');
+            console.log('Container successfully shared!');
             this.ngZone.run(() => this.router.navigateByUrl('/container-share/'+this.container._id));
           }, (error) => {
             console.log(error);

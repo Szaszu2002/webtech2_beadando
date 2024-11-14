@@ -115,9 +115,7 @@ export class ContainerListComponent implements OnInit {
         console.log("Deleted successfully!");
         this.Containers.splice(index,1);
       });
-    }
-    
-    
+    } 
   }
 
   open(index){

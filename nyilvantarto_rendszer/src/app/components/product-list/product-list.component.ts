@@ -82,13 +82,11 @@ export class ProductListComponent implements OnInit {
   }
  
   setProductList(data){
-    //console.log(data);
     this.Products=data;
     this.dataSource = new MatTableDataSource(this.Products);
     try{
     for (let index = 0; index < this.Products.length; index++)
       {
-        //console.log(index)
       const element = new Date(this.Products[index].limit) ;
       this.Products[index].limit=element;
     }
